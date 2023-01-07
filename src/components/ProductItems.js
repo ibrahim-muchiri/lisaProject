@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import './../App.css';
 import Product from './Product';
 
-export default function ProductItems({ items, onAdd, onRemove, cartItems }) {
-  const [search, setSearch] = useState('');
+export default function ProductItems({ items, onAdd, onRemove, cartItems, setSearchResults, searchResults}) {    
   console.log('The items are here: ', items);
+  console.log(ProductItems);
 
   const totalAmount = cartItems.reduce(
     (acc, curItem) =>
@@ -15,20 +15,30 @@ export default function ProductItems({ items, onAdd, onRemove, cartItems }) {
     0
   );
   console.log('The total amount is : ', totalAmount);
+
+  // //Search functionality
+  // const handleSearchTerm = (e) => {
+  //   if(!e.target.value) return setSearchResults(items);    
+
+  //   const resultArray = items.filter(item => item.product_name.includes(e.target.value));
+  //   setSearchResults(resultArray);    
+  //   console.log("data", resultArray);
+
+  // }
+
+ 
   return (
     <React.Fragment>
       <div className="app">
         <div className="rectangle">
           <div className="search-rectangle">
             <SearchIcon className="search-icon" />
-            <input
+            <input            
               type="text"
               style={{ border: 'none' }}
               className="search-product"
-              placeholder="Search products"
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
+              placeholder="Search products"              
+              // onChange={handleSearchTerm}
             />
           </div>
           <h4 className="create-transaction">Create transaction</h4>
@@ -43,6 +53,11 @@ export default function ProductItems({ items, onAdd, onRemove, cartItems }) {
                   onRemove={onRemove}
                   count={item.quantity}
                   cartItems={cartItems}
+                  setSearchResults= {setSearchResults}
+                  searchResults={searchResults}
+                  // searchTerm= {searchTerm}
+                  // searchHandler= {searchHandler}                
+
                 />
               ))
             : 'No data'}

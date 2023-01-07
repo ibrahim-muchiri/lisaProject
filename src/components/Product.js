@@ -8,6 +8,9 @@ export default function Product({
   count,
   productId,
   cartItems,
+  searchResults
+  
+
 }) {
   // console.log('The product Id: ', productId);
 
@@ -19,9 +22,9 @@ export default function Product({
         </div>
         <div>
           <div className="button">
-            <button onClick={() => onAdd(item)} className="plus">
-              +
-            </button>
+          <button onClick={() => onRemove(item)} className="minus">
+              -
+            </button> 
 
             {cartItems.map((cartItem) =>
               cartItem.id === item.id ? (
@@ -32,14 +35,14 @@ export default function Product({
                 ''
               )
             )}
-
-            <button onClick={() => onRemove(item)} className="minus">
-              -
+             <button onClick={() => onAdd(item)} className="plus">
+              +
             </button>
+
           </div>
         </div>
       </div>
-      <hr />
+      {/* <hr /> */}
     </div>
   );
 }

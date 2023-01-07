@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductItems from './components/ProductItems';
+// import SearchProduct from './components/SearchProduct';
 
 //Backend connection
 const accessToken = '180|v0n3wJMC0ZC1PQbZ3ybMDzBPxNyPbXWn9FOgrbCW';
@@ -14,7 +15,9 @@ const authAxios = axios.create({
 });
 
 const App = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); 
+  const [ searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const [cartItems, setCartItems] = useState([]);
   let newOperationData = [];
@@ -84,14 +87,34 @@ const App = () => {
     }
   };
 
+  //  //Search functionality
+   const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if(searchTerm !== "") {
+      const newItemList = data.filter((list) => {
+        return Object.values(list).join(" ").toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      });
+      setSearchResults(newItemList);
+    }
+    else {
+      setSearchResults(data);
+    }
+   }
+
   return (
-    <div>
-      <ProductItems
-        items={newOperationData}
+    <div>           
+      <ProductItems      
+        items={ newOperationData }
         onAdd={onAdd}
         onRemove={onRemove}
-        cartItems={cartItems}
-      />
+        cartItems={cartItems }
+        searchHandler= {searchHandler}
+        searchTerm= {searchTerm}
+        setSearchResults= {setSearchResults}
+      />   
+      {/* <SearchProduct searchResults={searchResults}/>    */}
     </div>
   );
 };

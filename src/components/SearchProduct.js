@@ -1,9 +1,12 @@
-import React from 'react'
+// import Product from "./Product"
 
-function SearchProduct() {
-  return (
-    <div>SearchProduct</div>
-  )
-}
+// function SearchProduct({searchResults}) {  
+//   const results = searchResults.map(item => <Product key={item.id} item={item} />)
 
-export default SearchProduct
+//   const content = results?.length ? results : <article><p>No matching posts</p></article>
+//   return (
+//     <main>{content}</main>
+//   )
+// }
+
+// export default SearchProduct
